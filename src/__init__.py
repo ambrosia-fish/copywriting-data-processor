@@ -1,0 +1,1 @@
+# Copywriting Newsletter Data Processor
