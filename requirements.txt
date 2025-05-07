@@ -1,0 +1,14 @@
+beautifulsoup4==4.12.2
+feedparser==6.0.10
+feedsearch-crawler==0.0.5
+google-api-python-client==2.111.0
+google-auth-httplib2==0.1.1
+google-auth-oauthlib==1.2.0
+pandas==2.1.2
+pytrends==4.9.2
+requests==2.31.0
+requests-html==0.10.0
+selenium==4.15.2
+email-validator==2.1.0.post1
+tqdm==4.66.1
+openpyxl==3.1.2
