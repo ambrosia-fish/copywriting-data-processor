@@ -1,0 +1,66 @@
+{
+  "output": {
+    "google_sheets": {
+      "enabled": true,
+      "sheet_id": "YOUR_SHEET_ID",
+      "credentials_file": "credentials.json"
+    },
+    "csv": {
+      "enabled": true,
+      "path": "data/newsletters.csv"
+    },
+    "excel": {
+      "enabled": false,
+      "path": "data/newsletters.xlsx"
+    },
+    "json": {
+      "enabled": true,
+      "path": "data/newsletters.json"
+    }
+  },
+  "sources": {
+    "rss": {
+      "enabled": true,
+      "websites": [
+        "copyblogger.com",
+        "copyhackers.com",
+        "enchantingmarketing.com",
+        "marketingprofs.com",
+        "marketingexamples.com"
+      ],
+      "max_feeds_per_site": 3
+    },
+    "feedspot": {
+      "enabled": true
+    },
+    "curated_lists": {
+      "enabled": true,
+      "sources": [
+        "https://www.lucianoviterale.com/blog/copywriting/best-copywriting-newsletters/",
+        "https://blog.hubspot.com/marketing/best-marketing-newsletters"
+      ]
+    },
+    "substack": {
+      "enabled": true,
+      "keywords": ["copywriting", "marketing", "email marketing", "content marketing"]
+    }
+  },
+  "processing": {
+    "subscriber_count": {
+      "default_if_unknown": false,
+      "default_value": 1000,
+      "rounding": {
+        "less_than_1000": 100,
+        "less_than_10000": 1000,
+        "less_than_500000": 10000,
+        "above_500000": 100000,
+        "million_plus": "1 Million+"
+      }
+    },
+    "email_verification": {
+      "enabled": true,
+      "method": "basic"
+    },
+    "limit": 3000
+  }
+}
