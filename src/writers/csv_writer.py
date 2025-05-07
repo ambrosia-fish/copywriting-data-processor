@@ -15,7 +15,7 @@ class CsvWriter(BaseWriter):
         Args:
             config: Configuration dictionary for the CSV writer
         """
-        self.output_path = config.get('path', 'data/newsletters.csv')
+        self.output_path = config.get('path', 'newsletters.csv')
     
     def write(self, newsletters: List[Dict]) -> None:
         """Write newsletter data to a CSV file.
@@ -25,8 +25,10 @@ class CsvWriter(BaseWriter):
         """
         logging.info(f"Writing {len(newsletters)} newsletters to CSV: {self.output_path}")
         
-        # Ensure directory exists
-        os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
+        # Ensure directory exists if there's a directory in the path
+        output_dir = os.path.dirname(self.output_path)
+        if output_dir:  # Only create directory if there's a directory path
+            os.makedirs(output_dir, exist_ok=True)
         
         # Define column headers
         fieldnames = ['name', 'link', 'publisher', 'email', 'subscribers', 'social_media', 'source']
