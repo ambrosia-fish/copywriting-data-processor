@@ -1,15 +1,18 @@
-# Copywriting Newsletter Data Processor
+# Copywriting Newsletter Data Collector
 
-This tool is designed to collect data on copywriting newsletters using RSS feeds and web scraping techniques. It can gather information such as newsletter names, direct links, publisher information, contact emails, subscriber counts (when available), and social media accounts.
+A tool that collects data on copywriting newsletters from Substack, focusing on finding complete entries with all required information.
 
-## Features
+## What It Does
 
-- RSS feed discovery and processing
-- Web scraping of newsletter information
-- Email validation and cleaning
-- Subscriber count standardization
-- Google Sheets integration for data storage
-- Multi-source data collection and deduplication
+This tool searches Substack for copywriting and marketing newsletters, extracting:
+- Name of Publication/Newsletter
+- Direct link to the newsletter
+- Owner/publisher name
+- Contact email address
+- Subscriber count
+- Social media accounts (when available)
+
+The tool is designed to **only save entries that have complete information** - ensuring your dataset is high quality and ready to use.
 
 ## Installation
 
@@ -20,52 +23,51 @@ cd copywriting-data-processor
 
 # Create a virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-## Configuration
-
-1. Copy the `config_template.json` to `config.json` and fill in your settings
-2. If using Google Sheets, set up the Google Sheets API credentials (see the [setup instructions](docs/google_sheets_setup.md))
-
 ## Usage
 
-### Basic Usage
+Basic usage:
 
 ```bash
-# Run the full pipeline
+# Run with default settings
 python run.py
 
-# Run only specific components
-python run.py --sources=rss,feedspot,curated_lists
-python run.py --skip-email-verification
-python run.py --limit=500
+# Specify output file
+python run.py --output newsletters.csv
+
+# Specify maximum number of newsletters to collect
+python run.py --limit 500
+
+# Specify search keywords
+python run.py --keywords "copywriting,email marketing,content marketing"
+
+# Only collect newsletters with complete data (name, link, publisher, email, subscriber count)
+python run.py --complete-only
+
+# Enable verbose logging
+python run.py --verbose
 ```
 
-### Advanced Usage
+## How It Works
 
-For more detailed instructions on customizing data collection and processing, see the [advanced usage documentation](docs/advanced_usage.md).
+1. Searches Substack for newsletters matching your keywords
+2. Extracts available data using Substack's unofficial API
+3. Enhances data by parsing newsletter homepages for additional information
+4. Applies filtering to ensure only complete entries are saved
+5. Formats subscriber counts according to your requirements
+6. Verifies email addresses to ensure they're valid
+7. Exports the collected data to a CSV file
 
-## Data Sources
+## Requirements
 
-The tool collects data from multiple sources:
-
-1. **RSS Feeds**: Discovers and processes RSS feeds from marketing and copywriting websites
-2. **Curated Lists**: Uses pre-compiled lists of top copywriting newsletters
-3. **Feedspot Directory**: Extracts newsletter information from Feedspot's directory
-4. **Substack Discovery**: Finds copywriting newsletters on Substack
-
-## Output Format
-
-The collected data is formatted according to requirements and can be exported to:
-
-- Google Sheets (directly via API)
-- CSV files
-- Excel files
-- JSON format
+- Python 3.7+
+- Dependencies listed in requirements.txt
+- Internet connection to access Substack
 
 ## License
 
